@@ -1,0 +1,190 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tv_ip"
+        style="@style/tv_label"
+        android:text="IP:" />
+
+    <TextView
+        android:id="@+id/tv_user"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_ip"
+        android:text="User:" />
+
+    <TextView
+        android:id="@+id/tv_passwd"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_user"
+        android:text="Password:" />
+
+    <TextView
+        android:id="@+id/tv_certName"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_passwd"
+        android:text="Cert Name:" />
+
+    <TextView
+        android:id="@+id/tv_certPasswd"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_certName"
+        android:text="Cert Psd:" />
+
+    <TextView
+        android:id="@+id/tv_sms"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_certPasswd"
+        android:text="Sms Code:" />
+
+    <TextView
+        android:id="@+id/tv_url"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_sms"
+        android:text="Url:" />
+    
+    <TextView 
+        android:id="@+id/tv_rnd_code"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_url"
+        android:text="RndCode:" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_ip"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_ip"
+        android:layout_toRightOf="@id/tv_ip"
+        android:text="200.200.73.151"
+        android:inputType="textUri" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_user"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_user"
+        android:layout_toRightOf="@id/tv_user"
+        android:text="lyx"
+        android:inputType="textNoSuggestions" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_passwd"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_passwd"
+        android:layout_toRightOf="@id/tv_passwd"
+        android:inputType="textPassword" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_certName"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_certName"
+        android:layout_toRightOf="@id/tv_certName"
+        android:text="/sdcard/cert/lyx.p12"
+        android:inputType="textNoSuggestions" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_certPasswd"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_certPasswd"
+        android:layout_toRightOf="@id/tv_certPasswd"
+        android:text="123"
+        android:inputType="textPassword" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_sms"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_sms"
+        android:layout_toRightOf="@id/tv_sms"
+        android:inputType="number" />
+
+    <com.example.yuanpeiyu.vpntest.RememberEditText
+        android:id="@+id/edt_url"
+        style="@style/match_parent"
+        android:layout_alignBaseline="@id/tv_url"
+        android:layout_toRightOf="@id/tv_url"
+        android:inputType="textUri" />
+
+    <ImageButton 
+        android:id="@+id/imgbtn_rnd_code"
+        android:layout_width="80dp"
+        android:layout_height="38dp"
+        android:layout_alignTop="@id/tv_rnd_code"
+        android:layout_alignParentRight="true"
+        android:background="#FFFFFFFF"
+        android:onClick="onClick"
+        />
+
+    <EditText 
+        android:id="@+id/edt_rnd_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_rnd_code"
+        android:layout_toRightOf="@id/tv_rnd_code"
+        android:layout_toLeftOf="@id/imgbtn_rnd_code"
+        android:inputType="textNoSuggestions" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_rnd_code"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text="Logout" />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_rnd_code"
+        android:layout_toLeftOf="@id/btn_logout"
+        android:onClick="onClick"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        style="@style/tv_label"
+        android:layout_below="@id/btn_logout"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/btn_sms"
+        style="@style/tv_label"
+        android:layout_below="@id/tv_rnd_code"
+        android:layout_toRightOf="@id/btn_logout"
+        android:onClick="onClick"
+        android:text="send sms" />
+
+    <Button
+        android:id="@+id/btn_reget_sms"
+        style="@style/tv_label"
+        android:layout_below="@id/btn_sms"
+        android:layout_alignLeft="@id/btn_sms"
+        android:onClick="onClick"
+        android:text="reget sms" />
+
+    <Button
+        android:id="@+id/btn_test_http"
+        style="@style/tv_label"
+        android:layout_alignBaseline="@+id/btn_cancel"
+        android:layout_alignBottom="@+id/btn_cancel"
+        android:layout_alignLeft="@+id/btn_login"
+        android:onClick="onClick"
+        android:text="T_Http" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_cancel" />
+
+    <LinearLayout
+        android:id="@+id/adLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+    </LinearLayout>
+</RelativeLayout>

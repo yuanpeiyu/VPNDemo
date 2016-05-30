@@ -1,0 +1,141 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.yuanpeiyu.vpntest">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_FRAME_BUFFER"/>
+    <permission
+        android:name="com.pekall.emdm.test_conflict"
+        android:protectionLevel="signature"
+    />
+    <permission android:name="com.pekall.emdm.browser.permission.PRELOAD"
+                android:protectionLevel="signatureOrSystem" />
+                <!--com.pekall.emdm-->
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@style/AppTheme" >
+        <meta-data android:name="APPLICATION_CLASS_NAME" android:value="com.example.yuanpeiyu.vpntest.MyApplication"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".TestMainActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.DeviceDefault.Light"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--<activity android:name=".TestDeviceOwnerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>-->
+
+        <activity
+            android:name=".GSMCellLocationActivity"
+            android:label="@string/app_name" >
+        <!--<intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>-->
+        </activity>
+        <!-- VpnService服务 -->
+        <!--<service android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService"
+                 android:permission="test_conflict"
+                 >
+            <intent-filter>
+                <action android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService"/>
+            </intent-filter>
+        </service>-->
+
+        <service android:name=".MyService"/>
+
+        <service
+            android:name=".ToyVpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE"></service>
+
+        <service
+            android:name=".ToyVpnService2"
+            android:permission="android.permission.BIND_VPN_SERVICE"></service>
+
+        <service
+            android:name=".localVPN.LocalVPNService"
+            android:permission="android.permission.BIND_VPN_SERVICE"></service>
+
+        <receiver android:name=".TestBroadcast">
+            <intent-filter>
+                <action android:name="com.ypy.test"/>
+            </intent-filter>
+        </receiver>
+
+
+        <receiver
+            android:name=".MdmDeviceAdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin"/>
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED"/>
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED"/>
+                <action android:name="android.app.action.ACTION_PASSWORD_FAILED"/>
+                <action android:name="android.app.action.ACTION_PASSWORD_SUCCEEDED"/>
+                <action android:name="android.app.action.ACTION_PASSWORD_CHANGED"/>
+                <action android:name="android.app.action.ACTION_PASSWORD_EXPIRING"/>
+            </intent-filter>
+        </receiver><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+        <!--<provider android:authorities="com.uusafe.emm.sdk.config"
+            android:enabled="true"
+            android:exported="true"
+            android:name="com.uusafe.sandboxsdk.provider.ConfigProvider"
+            android:process=":UUDaemon"/>-->
+
+        <!--<provider
+            android:name="com.pekall.emdm.PkContentProvider"
+            android:authorities="com.pekall.pk.providers.sdk"
+            android:exported="true"/>-->
+    </application>
+    <!--android:permission="android.permission.BIND_VPN_SERVICE"-->
+</manifest>
