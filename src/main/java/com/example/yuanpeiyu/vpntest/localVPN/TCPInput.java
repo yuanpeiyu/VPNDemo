@@ -21,6 +21,7 @@ import android.util.Log;
 import com.example.yuanpeiyu.vpntest.localVPN.TCB.TCBStatus;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -67,6 +68,38 @@ public class TCPInput implements Runnable
                     Log.d(TAG, "key.isValid : " + key.isValid()
                             + ", key.isConnectable(): " + key.isConnectable()
                             + ", key.isReadable() : " + key.isReadable());
+                    Log.d(TAG, "tcb is " + key.attachment());
+                    if (key.attachment() != null) {
+                        if (key.attachment() instanceof  TCB) {
+                            TCB tcb = (TCB) key.attachment();
+                            if (tcb.referencePacket != null) {
+                                if (tcb.referencePacket.ip4Header != null) {
+                                    Log.d(TAG, "packet.ip4Header is " + tcb.referencePacket.ip4Header);
+                                } else {
+                                    Log.d(TAG, "tcb.referencePacket.ip4Heade is null");
+                                }
+                                if (tcb.referencePacket.isTCP() && tcb.referencePacket.tcpHeader != null) {
+                                    Log.d(TAG, "packet.tcpHeader is " + tcb.referencePacket.tcpHeader);
+                                } else {
+                                    Log.d(TAG, "tcb.referencePacket.tcpHeader is null");
+                                }
+                                if (tcb.referencePacket.backingBuffer != null) {
+                                    Log.d(TAG, "packet.payloadsize is "
+                                            + (tcb.referencePacket.backingBuffer.limit()
+                                            - tcb.referencePacket.backingBuffer.position()));
+                                } else {
+                                    Log.d(TAG, "tcb.referencePacket.backingBuffer is null");
+                                }
+                            } else {
+                                Log.d(TAG, "referencePacket is null");
+                            }
+                        } else {
+                            Log.d(TAG, "key.attachment() is not instance of TCB");
+                        }
+                    } else {
+                        Log.d(TAG, "packkey.attachment()et is null");
+                    }
+
                     if (key.isValid())
                     {
                         if (key.isConnectable())
@@ -81,7 +114,7 @@ public class TCPInput implements Runnable
         {
             Log.i(TAG, "Stopping");
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             Log.w(TAG, e.toString(), e);
         }
@@ -108,6 +141,8 @@ public class TCPInput implements Runnable
 
                 tcb.mySequenceNum++; // SYN counts as a byte
                 key.interestOps(SelectionKey.OP_READ);
+                Packet writeToDevice = new Packet(ByteBuffer.wrap(responseBuffer.array()));
+                Log.d(TAG, "processConnect writeToDevice : " + writeToDevice);
             } else {
                 Log.d(TAG, "processConnect tcb.channel not finishConnect()");
             }
@@ -185,6 +220,13 @@ public class TCPInput implements Runnable
                         tcb.mySequenceNum, tcb.myAcknowledgementNum, readBytes);
                 tcb.mySequenceNum += readBytes; // Next sequence number
                 receiveBuffer.position(HEADER_SIZE + readBytes);
+                Packet writeToDevice = null;
+                try {
+                    writeToDevice = new Packet(ByteBuffer.wrap(receiveBuffer.array()));
+                    Log.d(TAG, "processInput writeToDevice : " + writeToDevice);
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
             }
         }
         outputQueue.offer(receiveBuffer);

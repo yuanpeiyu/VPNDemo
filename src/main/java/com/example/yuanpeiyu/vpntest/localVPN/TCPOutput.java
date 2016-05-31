@@ -87,6 +87,7 @@ public class TCPOutput implements Runnable {
                     Log.d(TAG, "tcb is null ");
                 } else {
                     Log.d(TAG, "tcb is not null " + tcb.status);
+                    Log.d(TAG, "tcb is " + tcb);
                 }
                 if (tcb == null)
                     initializeConnection(ipAndPort, destinationAddress, destinationPort,
@@ -124,11 +125,10 @@ public class TCPOutput implements Runnable {
             SocketChannel outputChannel = SocketChannel.open();
             outputChannel.configureBlocking(false);
             vpnService.protect(outputChannel.socket());
-
             TCB tcb = new TCB(ipAndPort, random.nextInt(Short.MAX_VALUE + 1), tcpHeader.sequenceNumber, tcpHeader.sequenceNumber + 1,
                     tcpHeader.acknowledgementNumber, outputChannel, currentPacket);
             TCB.putTCB(ipAndPort, tcb);
-
+            Log.d(TAG, "tcb is " + tcb);
             try {
                 outputChannel.connect(new InetSocketAddress(destinationAddress, destinationPort));
                 if (outputChannel.finishConnect()) {

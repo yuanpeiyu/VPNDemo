@@ -217,7 +217,7 @@ public class ToyVpnService extends VpnService implements Handler.Callback, Runna
         log("RST is : " + RST);
         log("SYN is : " + SYN);
         log("FIN is : " + FIN);
-        try {
+/*        try {
 //            channel.configureBlocking(false);
             if (SYN == 1 && ACK == 0) {
 //                data[33] = Byte.parseByte("00010010", 2);
@@ -227,7 +227,7 @@ public class ToyVpnService extends VpnService implements Handler.Callback, Runna
             } else if (SYN == 1 && ACK == 1) {
 //                channel.send(ByteBuffer.wrap(data, ipHeader, data.length - ipHeader), new InetSocketAddress(dest, destPort));
             }
-            byte[] buffer = new byte[1024 * 100];
+            *//*byte[] buffer = new byte[1024 * 100];
             int length = channel.read(ByteBuffer.wrap(buffer));
             if (length > 0) {
                 log("length is : " + length);
@@ -238,9 +238,9 @@ public class ToyVpnService extends VpnService implements Handler.Callback, Runna
                 }
             } else {
                 log("length is 0");
-            }
+            }*//*
 //            if (6 == protocol) {
-                /*if (ipHeader + tcpHeader == ipDataLength) {
+                *//*if (ipHeader + tcpHeader == ipDataLength) {
                     log("deal tcp protocol");
                     socket.setSoTimeout(30000);
                     log("deal tcp protocol 1");
@@ -265,10 +265,10 @@ public class ToyVpnService extends VpnService implements Handler.Callback, Runna
                     }
                     socket.close();
                     log("deal tcp protocol 7");
-                }*/
+                }*//*
 
 
-            /*} else if (17 == protocol) {
+            *//*} else if (17 == protocol) {
                 log("deal udp protocol");
                 DatagramSocket datagramSocket = new DatagramSocket();
                 protect(datagramSocket);
@@ -282,10 +282,10 @@ public class ToyVpnService extends VpnService implements Handler.Callback, Runna
                 log("deal udp protocol 4");
             } else {
                 log("unsupport protocol " + protocol);
-            }*/
+            }*//*
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private String toHexString(int i) {

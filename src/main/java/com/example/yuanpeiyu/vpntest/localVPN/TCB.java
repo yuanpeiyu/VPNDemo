@@ -82,8 +82,10 @@ public class TCB
         this.ipAndPort = ipAndPort;
 
         this.mySequenceNum = mySequenceNum;
+//        this.mySequenceNum = theirSequenceNum;
         this.theirSequenceNum = theirSequenceNum;
         this.myAcknowledgementNum = myAcknowledgementNum;
+//        this.myAcknowledgementNum = theirAcknowledgementNum;
         this.theirAcknowledgementNum = theirAcknowledgementNum;
 
         this.channel = channel;
